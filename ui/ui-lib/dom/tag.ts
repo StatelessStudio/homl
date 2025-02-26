@@ -7,14 +7,14 @@ export abstract class Tag {
 	public text?: string;
 
 	protected abstract tag: string;
-	protected children?: Tag[];
+	protected children: Tag[] = [];
 
 	protected element: HTMLElement;
 	protected eventListeners: { [key: string]: EventListener } = {};
 
 	public constructor(options: TagOptions = {}) {
-		this.children = options.children;
-		this.text = options.text;
+		this.children = options.children ?? this.children;
+		this.text = options.text ?? this.text;
 	}
 
 	public create(): this {
@@ -27,7 +27,7 @@ export abstract class Tag {
 	}
 
 	protected createChildren(): this {
-		for (const child of this.children || []) {
+		for (const child of this.children) {
 			child.create();
 		}
 
@@ -63,7 +63,7 @@ export abstract class Tag {
 	}
 
 	public renderChildren(): this {
-		for (const child of this.children || []) {
+		for (const child of this.children) {
 			child.render();
 		}
 
