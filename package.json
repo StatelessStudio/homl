@@ -1,5 +1,5 @@
 {
-	"name": "{{project-name}}",
+	"name": "hyperclass",
 	"version": "1.0.0",
 	"typescript-template": {
 		"base": "1.0.1",
