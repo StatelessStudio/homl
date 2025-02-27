@@ -25,7 +25,9 @@ export abstract class Tag {
 
 		this.createElement();
 		this.registerEventListeners();
-		this.createChildren();
+		// TODO: This is currently called in render()
+		//	v--- This should be uncommented once that's optimized
+		//this.createChildren();
 		this.render();
 
 		return this;
