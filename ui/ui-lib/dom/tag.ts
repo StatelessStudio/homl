@@ -1,23 +1,28 @@
 export interface TagOptions {
 	children?: Tag[];
 	text?: string;
+	parent?: Tag;
 }
 
 export abstract class Tag {
 	public text?: string;
+	public element: HTMLElement;
+	public parent?: Tag;
 
 	protected abstract tag: string;
 	protected children: Tag[] = [];
 
-	protected element: HTMLElement;
 	protected eventListeners: { [key: string]: EventListener } = {};
 
 	public constructor(options: TagOptions = {}) {
 		this.children = options.children ?? this.children;
 		this.text = options.text ?? this.text;
+		this.parent = options.parent ?? this.parent;
 	}
 
-	public create(): this {
+	public create(options: { parent?: Tag } = {}): this {
+		this.parent = options.parent ?? this.parent;
+
 		this.createElement();
 		this.registerEventListeners();
 		this.createChildren();
@@ -28,15 +33,16 @@ export abstract class Tag {
 
 	protected createChildren(): this {
 		for (const child of this.children) {
-			child.create();
+			child.create({ parent: this });
 		}
 
 		return this;
 	}
 
 	protected createElement(): this {
-		this.element = document.createElement(this.tag);
-		document.body.appendChild(this.element);
+		const parentElement = this.parent?.element ?? document.body;
+		const elementFrag = document.createElement(this.tag);
+		this.element = parentElement.appendChild(elementFrag);
 
 		return this;
 	}
@@ -51,6 +57,11 @@ export abstract class Tag {
 
 	public render(): this {
 		this.renderElement();
+		// TODO: Optimize this to only re-create the children that have changed
+		//
+		// The line prior wipes out the children, so we need to re-create them
+		// 	here
+		this.createChildren();
 		this.renderChildren();
 
 		return this;
