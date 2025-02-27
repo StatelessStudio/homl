@@ -83,7 +83,7 @@ export abstract class Tag {
 	}
 
 	public getText(): string {
-		return this.text;
+		return this.text || '';
 	}
 
 	public on(action: string, fn: () => void): this {
