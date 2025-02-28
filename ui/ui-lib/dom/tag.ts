@@ -145,6 +145,19 @@ export abstract class Tag {
 		return this;
 	}
 
+	public appendChild(child: Tag): this {
+		child.parent = this;
+		this.children.push(child);
+
+		return this;
+	}
+
+	public createChild(child: Tag): this {
+		this.appendChild(child.create({ parent: this }));
+
+		return this;
+	}
+
 	public on(action: string, fn: () => void): this {
 		this.eventListeners[action] = fn.bind(this);
 
