@@ -20,8 +20,9 @@ describe('Tag', () => {
 
 	it('should set the text content of the element', () => {
 		const text = 'Hello, World!';
-		tag.setText(text).create();
-		expect(tag['element'].innerHTML).toBe(text);
+		tag.text.set(text);
+		tag.create();
+		expect(tag['element'].innerText).toBe(text);
 	});
 
 	it('should add event listeners to the element', () => {
@@ -32,7 +33,7 @@ describe('Tag', () => {
 	});
 
 	it('should create a child element', () => {
-		tag.setText('Parent');
+		tag.text.set('Parent');
 		const child = new TestTag({ text: 'Child' });
 		tag.populate([child]).create();
 
@@ -41,7 +42,7 @@ describe('Tag', () => {
 		expect(children.length)
 			.withContext('Expected one child element')
 			.toEqual(1);
-		expect((children[0] as HTMLElement).innerHTML)
+		expect((children[0] as HTMLElement).innerText)
 			.withContext('Expected child inner html')
 			.toEqual('Child');
 	});
@@ -49,21 +50,37 @@ describe('Tag', () => {
 	it('should render the element', () => {
 		const child = new TestTag({ text: 'Child' });
 		tag.populate([child]).create();
-		expect(child['element'].innerHTML).toBe('Child');
+		expect(child['element'].innerText).toBe('Child');
 	});
 
-	it('should update text content when setText is called', () => {
+	it('can set attributes via set()', () => {
+		const id = 'test-id';
+		const text = 'Updated Text';
+		tag.set({ id, text }).create();
+
+		expect(tag['element'].id).withContext('id').toBe(id);
+		expect(tag['element'].innerText).withContext('innerText').toBe(text);
+	});
+
+	it('can update attributes via set()', () => {
 		tag.create();
 
+		const id = 'test-id';
 		const text = 'Updated Text';
-		tag.setText(text).render();
+		tag.set({ id, text });
 
-		expect(tag['element'].innerHTML).toBe(text);
+		expect(tag['element'].id).withContext('id').toBe(id);
+		expect(tag['element'].innerText).withContext('innerText').toBe(text);
 	});
 
-	it('should return the correct text when getText is called', () => {
+	it('should not render attributes if not set', () => {
+		tag.create();
+		expect(tag['element'].id).toBe('');
+	});
+
+	it('should return the correct text when getting', () => {
 		const text = 'Sample Text';
-		tag.setText(text);
-		expect(tag.getText()).toBe(text);
+		tag.text.set(text);
+		expect(tag.text.get()).toBe(text);
 	});
 });

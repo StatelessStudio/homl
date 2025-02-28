@@ -1,11 +1,16 @@
+import { Attribute } from './attribute';
+
 export interface TagOptions {
-	children?: Tag[];
+	id?: string;
 	text?: string;
+	children?: Tag[];
 	parent?: Tag;
 }
 
 export abstract class Tag {
-	public text?: string;
+	public id = new Attribute({ name: 'id' });
+	public text = new Attribute({ name: 'innerText' });
+
 	public element: HTMLElement;
 	public parent?: Tag;
 
@@ -15,15 +20,42 @@ export abstract class Tag {
 	protected eventListeners: { [key: string]: EventListener } = {};
 
 	public constructor(options: TagOptions = {}) {
-		this.children = options.children ?? this.children;
-		this.text = options.text ?? this.text;
-		this.parent = options.parent ?? this.parent;
+		this.set(options);
+	}
+
+	public set(options: TagOptions): this {
+		for (const key in options) {
+			const option = options[key as keyof TagOptions];
+			const thisKey = key as keyof typeof this;
+
+			if (key in this && this[thisKey] !== undefined) {
+				const attribute = this[thisKey];
+
+				if (this.isAttribute(attribute)) {
+					attribute.set(option as string);
+				}
+				else {
+					this.setLocalProperty(key as keyof typeof this, option);
+				}
+			}
+		}
+
+		return this;
+	}
+
+	protected isAttribute(attr: any): attr is Attribute {
+		return attr instanceof Attribute;
+	}
+
+	protected setLocalProperty(key: keyof typeof this, value: any): void {
+		this[key] = value;
 	}
 
 	public create(options: { parent?: Tag } = {}): this {
 		this.parent = options.parent ?? this.parent;
 
 		this.createElement();
+		this.createAttributes();
 		this.registerEventListeners();
 		// TODO: This is currently called in render()
 		//	v--- This should be uncommented once that's optimized
@@ -49,6 +81,18 @@ export abstract class Tag {
 		return this;
 	}
 
+	protected createAttributes(): this {
+		for (const key in this) {
+			const attribute = this[key];
+
+			if (this.isAttribute(attribute)) {
+				attribute.create({ element: this.element });
+			}
+		}
+
+		return this;
+	}
+
 	protected registerEventListeners(): this {
 		for (const ev in this.eventListeners) {
 			this.element.addEventListener(ev, this.eventListeners[ev]);
@@ -70,7 +114,19 @@ export abstract class Tag {
 	}
 
 	protected renderElement(): this {
-		this.element.innerHTML = this.text || '';
+		this.renderAttributes();
+
+		return this;
+	}
+
+	protected renderAttributes(): this {
+		for (const key in this) {
+			const attribute = this[key];
+
+			if (this.isAttribute(attribute)) {
+				attribute.render();
+			}
+		}
 
 		return this;
 	}
@@ -87,16 +143,6 @@ export abstract class Tag {
 		this.children = children;
 
 		return this;
-	}
-
-	public setText(text: string): this {
-		this.text = text;
-
-		return this;
-	}
-
-	public getText(): string {
-		return this.text || '';
 	}
 
 	public on(action: string, fn: () => void): this {

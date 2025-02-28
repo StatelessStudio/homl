@@ -11,12 +11,16 @@ applet(() => {
 	new DivTag()
 		.populate([
 			(outputField = new ParagraphTag({ text: 'What\'s your name?' })),
-			(firstNameInput = new InputTag()),
+			(firstNameInput = new InputTag({ placeholder: 'Set name...' })),
 			new ButtonTag({ text: 'Send' }).onClick(() => setName()),
 		])
 		.create();
 
 	function setName() {
-		outputField.setText(`Hi, ${firstNameInput.getValue()}!`).render();
+		outputField.text.set(`Hi, ${firstNameInput.value.get()}!`);
+		firstNameInput.set({
+			placeholder: 'Change name...',
+			value: '',
+		});
 	}
 });
