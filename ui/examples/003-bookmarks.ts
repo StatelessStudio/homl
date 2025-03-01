@@ -13,24 +13,30 @@ applet(() => {
 	new DivTag()
 		.populate([
 			(nameInput = new InputTag({ placeholder: 'Name' })),
-			(urlInput = new InputTag({ placeholder: 'URL' })),
+			(urlInput = new InputTag({
+				placeholder: 'URL',
+				value: 'https://google.com',
+			})),
 			new ButtonTag({ text: 'Save' }).onClick(() => addBookmark()),
 			(list = new UnorderedListTag()),
 		])
 		.create();
 
 	function addBookmark() {
+		const name = nameInput.value.get();
 		const url = urlInput.value.get();
 
-		if (url) {
-			const listItem = new ListItemTag().populate([
-				new LinkTag({
-					href: url,
-					text: nameInput.value.get(),
-					//target: '_blank',
-				}),
-			]);
-			list.createChild(listItem);
+		if (name && url) {
+			list.createChild(
+				new ListItemTag().populate([
+					new LinkTag({
+						href: url,
+						text: name,
+						target: '_blank',
+					}),
+				])
+			);
+
 			nameInput.value.set('');
 			urlInput.value.set('');
 		}
