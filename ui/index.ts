@@ -1,1 +1,1 @@
-import './examples/002-basic-todo';
+import './examples/003-bookmarks';
