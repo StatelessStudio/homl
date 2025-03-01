@@ -31,14 +31,12 @@ export class Attribute {
 			return;
 		}
 
-		//@ts-ignore
-		this.element[this.name] = this.value ?? '';
+		(this.element as any)[this.name] = this.value ?? '';
 	}
 
 	public get(): string {
 		if (this.element && this.name in this.element) {
-			//@ts-ignore
-			this.value = this.element[this.name];
+			this.value = (this.element as any)[this.name];
 		}
 
 		return this.value ?? '';
