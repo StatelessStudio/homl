@@ -1,5 +1,10 @@
 import './mock-dom';
 
+beforeEach(() => {
+	// Reset the dom before each test
+	document.body.innerHTML = '';
+});
+
 describe('DOM Mocking', () => {
 	it('should create a div element', () => {
 		const div = document.createElement('div');
