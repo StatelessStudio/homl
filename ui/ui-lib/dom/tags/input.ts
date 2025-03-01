@@ -16,7 +16,7 @@ export class InputTag extends Tag {
 		this.set(options);
 	}
 
-	public set(options: InputTagOptions): this {
+	public override set(options: InputTagOptions): this {
 		return super.set(options);
 	}
 }
