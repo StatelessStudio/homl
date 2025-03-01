@@ -25,6 +25,13 @@ describe('Tag', () => {
 		expect(tag['element'].innerText).toBe(text);
 	});
 
+	it('can set local properties of the Tag', () => {
+		new TestTag({ children: [tag] }).create();
+
+		const element = document.body.children[0] as HTMLElement;
+		expect(element.children.length).toBe(1);
+	});
+
 	it('should add event listeners to the element', () => {
 		const clickSpy = jasmine.createSpy('clickSpy');
 		tag.onClick(clickSpy).create();
@@ -82,5 +89,47 @@ describe('Tag', () => {
 		const text = 'Sample Text';
 		tag.text.set(text);
 		expect(tag.text.get()).toBe(text);
+	});
+
+	it('can append a child to the element', () => {
+		const child = new TestTag({ text: 'Child' });
+		tag.appendChild(child);
+		tag.create();
+
+		const children = tag['element'].children;
+		expect(children.length).toBe(1);
+		expect((children[0] as HTMLElement).innerText).toBe('Child');
+	});
+
+	it('appendChild() does not render the child until create() is called', () => {
+		const child = new TestTag({ text: 'Child' });
+		tag.create();
+		tag.appendChild(child);
+
+		const children = tag['element'].children;
+		expect(children.length).toBe(0);
+	});
+
+	it('appendChild() can be called multiple times', () => {
+		const child1 = new TestTag({ text: 'Child1' });
+		const child2 = new TestTag({ text: 'Child2' });
+		tag.appendChild(child1);
+		tag.appendChild(child2);
+		tag.create();
+
+		const children = tag['element'].children;
+		expect(children.length).toBe(2);
+		expect((children[0] as HTMLElement).innerText).toBe('Child1');
+		expect((children[1] as HTMLElement).innerText).toBe('Child2');
+	});
+
+	it('can create a child element', () => {
+		const child = new TestTag({ text: 'Child' });
+		tag.create();
+		tag.createChild(child);
+
+		const children = tag['element'].children;
+		expect(children.length).toBe(1);
+		expect((children[0] as HTMLElement).innerText).toBe('Child');
 	});
 });
