@@ -1,16 +1,14 @@
-import { applet } from '../ui-lib/applet/applet';
-
-import { DivTag } from '../ui-lib/dom/tags/div';
 import { ButtonTag } from '../ui-lib/dom/tags/button';
 import { InputTag } from '../ui-lib/dom/tags/input';
 import { UnorderedListTag } from '../ui-lib/dom/tags/unordered-list';
 import { ListItemTag } from '../ui-lib/dom/tags/list-item';
 import { LinkTag } from '../ui-lib/dom/tags/link';
+import { PageContainer } from './shared';
 
-applet(() => {
+export function example() {
 	let list: UnorderedListTag, nameInput: InputTag, urlInput: InputTag;
 
-	new DivTag()
+	new PageContainer()
 		.populate([
 			(nameInput = new InputTag({ placeholder: 'Name' })),
 			(urlInput = new InputTag({
@@ -41,4 +39,4 @@ applet(() => {
 			urlInput.value.set('');
 		}
 	}
-});
+}

@@ -1,32 +1,20 @@
-import { applet } from '../ui-lib/applet/applet';
-
-import { DivTag } from '../ui-lib/dom/tags/div';
 import { ButtonTag } from '../ui-lib/dom/tags/button';
 import { InputTag } from '../ui-lib/dom/tags/input';
 import { UnorderedListTag } from '../ui-lib/dom/tags/unordered-list';
 import { ListItemTag } from '../ui-lib/dom/tags/list-item';
-import { applyStyle, px, Styling } from '../ui-lib/dom/style';
+import { PageContainer } from './shared/page-container';
 
-export class PageContainer extends DivTag {
-	public override defaultStyling(): Styling {
-		return {
-			...super.defaultStyling(),
-			margin: 'auto',
-			maxWidth: px(800),
-		};
-	}
-}
+// Look at applyTheme() from shared/theme.ts and page-container.ts for
+//	more examples & info on how to apply styles to elements
 
-applet(() => {
-	applyTheme();
-
+export function example() {
 	const todoList = new UnorderedListTag();
 	const todoInput = new InputTag({ placeholder: 'Enter a todo' });
 	const todoButton = new ButtonTag({ text: 'Add Todo' }).onClick(() =>
 		addTodo()
 	);
 
-	new PageContainer({ style: { padding: '20px', maxWidth: '400px' } })
+	new PageContainer({ style: { padding: '40px', maxWidth: '400px' } })
 		.populate([todoInput, todoButton, todoList])
 		.create();
 
@@ -59,35 +47,4 @@ applet(() => {
 			style: { backgroundColor: '' },
 		});
 	}
-});
-
-function applyTheme() {
-	const styleTheme: Styling = {
-		backgroundColor: '#333',
-		color: '#efefef',
-		fontFamily: 'Arial, sans-serif',
-	};
-
-	applyStyle('body', styleTheme);
-
-	const inputStyle: Styling = {
-		display: 'block',
-		width: '100%',
-		marginBottom: '1em',
-		padding: '10px',
-		border: 'none',
-		borderRadius: '8px',
-		outline: '1px solid #007bff55',
-		transition: 'background-color 0.3s',
-	};
-
-	applyStyle('input, button', inputStyle);
-
-	const buttonStyle: Styling = {
-		backgroundColor: '#007bff',
-		color: 'white',
-		cursor: 'pointer',
-	};
-
-	applyStyle('button', buttonStyle);
 }

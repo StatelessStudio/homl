@@ -1,14 +1,12 @@
-import { applet } from '../ui-lib/applet/applet';
-
-import { DivTag } from '../ui-lib/dom/tags/div';
 import { ParagraphTag } from '../ui-lib/dom/tags/paragraph';
 import { ButtonTag } from '../ui-lib/dom/tags/button';
 import { InputTag } from '../ui-lib/dom/tags/input';
+import { PageContainer } from './shared';
 
-applet(() => {
+export function example() {
 	let outputField: ParagraphTag, firstNameInput: InputTag;
 
-	new DivTag()
+	new PageContainer()
 		.populate([
 			(outputField = new ParagraphTag({ text: 'What\'s your name?' })),
 			(firstNameInput = new InputTag({ placeholder: 'Set name...' })),
@@ -23,4 +21,4 @@ applet(() => {
 			value: '',
 		});
 	}
-});
+}
