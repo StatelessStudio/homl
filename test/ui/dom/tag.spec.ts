@@ -1,6 +1,7 @@
 import 'jasmine';
 import '../mock-dom';
 import { Tag } from '../../../ui/ui-lib/dom/tag';
+import { Styling } from '../../../ui/ui-lib/dom/style';
 
 class TestTag extends Tag {
 	protected tag = 'div';
@@ -131,5 +132,26 @@ describe('Tag', () => {
 		const children = tag['element'].children;
 		expect(children.length).toBe(1);
 		expect((children[0] as HTMLElement).innerText).toBe('Child');
+	});
+
+	it('should set style when provided in options', () => {
+		const tag = new TestTag({ style: { color: 'red' } }).create();
+		expect(tag['element'].style.color).toBe('red');
+	});
+
+	it('should set style when provided via set()', () => {
+		const tag = new TestTag().set({ style: { color: 'red' } }).create();
+		expect(tag['element'].style.color).toBe('red');
+	});
+
+	it('can provide styling in a subclass', () => {
+		class StyledTag extends TestTag {
+			protected override defaultStyling(): Styling {
+				return { color: 'green' };
+			}
+		}
+
+		const tag = new StyledTag().create();
+		expect(tag['element'].style.color).toBe('green');
 	});
 });

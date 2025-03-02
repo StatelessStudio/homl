@@ -1,14 +1,18 @@
 import { Attribute } from './attribute';
+import { Styling } from './style';
+import { ElementStyling } from './style/element-styling';
 
 export interface TagOptions {
 	id?: string;
 	text?: string;
+	style?: Styling;
 	children?: Tag[];
 	parent?: Tag;
 }
 
 export abstract class Tag {
 	public id = new Attribute({ name: 'id' });
+	public style: ElementStyling = new ElementStyling();
 	public text = new Attribute({ name: 'innerText' });
 
 	public element: HTMLElement;
@@ -20,6 +24,7 @@ export abstract class Tag {
 	protected eventListeners: { [key: string]: EventListener } = {};
 
 	public constructor(options: TagOptions = {}) {
+		this.style.merge(this.defaultStyling());
 		this.set(options);
 	}
 
@@ -34,6 +39,9 @@ export abstract class Tag {
 				if (this.isAttribute(attribute)) {
 					attribute.set(option as string);
 				}
+				else if (this.isStyling(attribute)) {
+					attribute.merge(option as Styling);
+				}
 				else {
 					this.setLocalProperty(key as keyof typeof this, option);
 				}
@@ -43,8 +51,16 @@ export abstract class Tag {
 		return this;
 	}
 
+	protected defaultStyling(): Styling {
+		return {};
+	}
+
 	protected isAttribute(attr: any): attr is Attribute {
 		return attr instanceof Attribute;
+	}
+
+	protected isStyling(attr: any): attr is ElementStyling {
+		return attr instanceof ElementStyling;
 	}
 
 	protected setLocalProperty(key: keyof typeof this, value: any): void {
@@ -56,6 +72,7 @@ export abstract class Tag {
 
 		this.createElement();
 		this.createAttributes();
+		this.createStyle();
 		this.registerEventListeners();
 		// TODO: This is currently called in render()
 		//	v--- This should be uncommented once that's optimized
@@ -93,6 +110,12 @@ export abstract class Tag {
 		return this;
 	}
 
+	protected createStyle(): this {
+		this.style.setElement(this.element);
+
+		return this;
+	}
+
 	protected registerEventListeners(): this {
 		for (const ev in this.eventListeners) {
 			this.element.addEventListener(ev, this.eventListeners[ev]);
@@ -115,6 +138,7 @@ export abstract class Tag {
 
 	protected renderElement(): this {
 		this.renderAttributes();
+		this.renderStyle();
 
 		return this;
 	}
@@ -127,6 +151,12 @@ export abstract class Tag {
 				attribute.render();
 			}
 		}
+
+		return this;
+	}
+
+	protected renderStyle(): this {
+		this.style.render();
 
 		return this;
 	}

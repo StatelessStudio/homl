@@ -1,1 +1,1 @@
-import './examples/003-bookmarks';
+import './examples/004-styling';
