@@ -1,4 +1,4 @@
-import { example } from './004-styling';
+import { example } from './005-components';
 
 import { applet } from '../ui-lib/applet/applet';
 import { applyTheme } from './shared';

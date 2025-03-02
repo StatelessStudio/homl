@@ -1,4 +1,5 @@
 import { Attribute } from './attribute';
+import { Component } from './components/component';
 import { Styling } from './style';
 import { ElementStyling } from './style/element-styling';
 
@@ -19,7 +20,7 @@ export abstract class Tag {
 	public parent?: Tag;
 
 	protected abstract tag: string;
-	protected children: Tag[] = [];
+	protected children: Array<Tag | Component> = [];
 
 	protected eventListeners: { [key: string]: EventListener } = {};
 
@@ -169,20 +170,20 @@ export abstract class Tag {
 		return this;
 	}
 
-	public populate(children: Tag[]): this {
+	public populate(children: Array<Tag | Component>): this {
 		this.children = children;
 
 		return this;
 	}
 
-	public appendChild(child: Tag): this {
+	public appendChild(child: Tag | Component): this {
 		child.parent = this;
 		this.children.push(child);
 
 		return this;
 	}
 
-	public createChild(child: Tag): this {
+	public createChild(child: Tag | Component): this {
 		this.appendChild(child.create({ parent: this }));
 
 		return this;
