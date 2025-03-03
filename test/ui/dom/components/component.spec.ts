@@ -9,7 +9,7 @@ describe('Component', () => {
 			}
 		}
 
-		new TestComponent().init().create();
+		new TestComponent().create();
 
 		const divElement = document.querySelector('div');
 		expect(divElement).withContext('div element').toBeTruthy();
@@ -31,7 +31,7 @@ describe('Component', () => {
 			}
 		}
 
-		new ParentComponent().init().create();
+		new ParentComponent().create();
 
 		const divElement = document.querySelector('div');
 		expect(divElement).withContext('div element').toBeTruthy();
@@ -57,7 +57,7 @@ describe('Component', () => {
 			}
 		}
 
-		new ParentComponent().init().create();
+		new ParentComponent().create();
 
 		const divElement = document.querySelector('div');
 		expect(divElement).withContext('div element').toBeTruthy();
@@ -83,7 +83,7 @@ describe('Component', () => {
 			}
 		}
 
-		const parent = new ParentComponent().init().create();
+		const parent = new ParentComponent().create();
 
 		const parentElement = document.querySelector('div');
 		expect(parentElement).withContext('div element').toBeTruthy();
@@ -134,7 +134,7 @@ describe('Component', () => {
 			}
 		}
 
-		const test = new ParentComponent().init().create();
+		const test = new ParentComponent().create();
 
 		const parentElement = document.querySelector('div');
 		expect(parentElement).withContext('parent element').toBeTruthy();
@@ -175,7 +175,7 @@ describe('Component', () => {
 			}
 		}
 
-		new ParentComponent().init().create();
+		new ParentComponent().create();
 
 		const parent1Element = document.querySelector('div');
 		expect(parent1Element).withContext('parent1 element').toBeTruthy();
@@ -222,7 +222,7 @@ describe('Component', () => {
 			}
 		}
 
-		const component = new TestComponent().init().create();
+		const component = new TestComponent().create();
 		component.remove();
 
 		const divElement = document.querySelector('div');
@@ -242,7 +242,7 @@ describe('Component', () => {
 			}
 		}
 
-		const parentComponent = new ParentComponent().init().create();
+		const parentComponent = new ParentComponent().create();
 		const childComponent = parentComponent.tag['children'][0] as Component;
 		childComponent.remove();
 

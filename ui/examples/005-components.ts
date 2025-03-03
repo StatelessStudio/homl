@@ -19,7 +19,7 @@ export class TodoList extends Component {
 	}
 
 	public addItem(text: string) {
-		const item = new TodoItem(text).init();
+		const item = new TodoItem(text);
 		this.items.push(item);
 		this.list.createChild(item.tag);
 	}
@@ -110,5 +110,5 @@ const redButtonStyle: Styling = {
 };
 
 export function example() {
-	new TodoList().init().create();
+	new TodoList().create();
 }

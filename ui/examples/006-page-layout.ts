@@ -48,5 +48,5 @@ export class Footer extends Component {
 }
 
 export function example() {
-	new PageLayout().init().create();
+	new PageLayout().create();
 }
