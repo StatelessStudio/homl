@@ -86,9 +86,12 @@ describe('Component', () => {
 		const parent = new ParentComponent().init().create();
 		const child = new ChildComponent().init().create({ parent });
 
-		const divElement = document.querySelector('div');
-		expect(divElement).withContext('div element').toBeTruthy();
-		expect(divElement?.innerText)
+		const parentElement = document.querySelector('div');
+		expect(parentElement).withContext('div element').toBeTruthy();
+
+		const childElement = parentElement?.children[0] as HTMLElement;
+		expect(childElement).withContext('child element').toBeTruthy();
+		expect(childElement?.innerText)
 			.withContext('text content')
 			.toBe('Child Component');
 	});
