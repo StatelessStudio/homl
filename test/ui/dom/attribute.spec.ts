@@ -26,6 +26,12 @@ describe('Attribute', () => {
 		expect(element.id).toBe('test-id');
 	});
 
+	it('can set the innerText of an element', () => {
+		attribute = new Attribute({ name: 'innerText', value: 'test' });
+		attribute.create({ element });
+		expect(element.innerText).toBe('test');
+	});
+
 	it('should update the attribute value on the element', () => {
 		attribute = new Attribute({ name: 'id' });
 		attribute.create({ element });
@@ -52,6 +58,15 @@ describe('Attribute', () => {
 	it('should return false if the attribute value is not null', () => {
 		attribute = new Attribute({ name: 'id', value: 'test-id' });
 		expect(attribute.isNull()).toBeFalse();
+	});
+
+	it('can return a value that has been modified by the user', () => {
+		attribute = new Attribute({ name: 'value', value: '' });
+		attribute.create({ element });
+
+		(element as HTMLInputElement).value = 'new-id';
+
+		expect(attribute.get()).toBe('new-id');
 	});
 
 	it('can set the value back to null', () => {
