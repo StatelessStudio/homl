@@ -30,7 +30,7 @@ export abstract class Component {
 	}
 
 	public render(): this {
-		//this.tag.render();
+		this.tag.render();
 
 		return this;
 	}

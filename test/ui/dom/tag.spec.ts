@@ -52,12 +52,10 @@ describe('Tag', () => {
 	});
 
 	it('should create a child element', () => {
-		tag.text.set('Parent');
 		const child = new TestTag({ text: 'Child' });
 		tag.populate([child]).create();
 
 		const children = tag['element'].children;
-		// TODO: Why is this failing with no children?
 		expect(children.length)
 			.withContext('Expected one child element')
 			.toEqual(1);

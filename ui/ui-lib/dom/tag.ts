@@ -75,9 +75,7 @@ export abstract class Tag {
 		this.createAttributes();
 		this.createStyle();
 		this.registerEventListeners();
-		// TODO: This is currently called in render()
-		//	v--- This should be uncommented once that's optimized
-		//this.createChildren();
+		this.createChildren();
 		this.render();
 
 		return this;
@@ -127,11 +125,6 @@ export abstract class Tag {
 
 	public render(): this {
 		this.renderElement();
-		// TODO: Optimize this to only re-create the children that have changed
-		//
-		// The line prior wipes out the children, so we need to re-create them
-		// 	here
-		this.createChildren();
 		this.renderChildren();
 
 		return this;

@@ -79,15 +79,17 @@ describe('Component', () => {
 
 		class ParentComponent extends Component {
 			public make() {
-				return new DivTag();
+				return new DivTag().populate([new ChildComponent()]);
 			}
 		}
 
 		const parent = new ParentComponent().init().create();
-		const child = new ChildComponent().init().create({ parent });
 
 		const parentElement = document.querySelector('div');
 		expect(parentElement).withContext('div element').toBeTruthy();
+		expect(parentElement?.children.length)
+			.withContext('parent child count')
+			.toBe(1);
 
 		const childElement = parentElement?.children[0] as HTMLElement;
 		expect(childElement).withContext('child element').toBeTruthy();
@@ -116,6 +118,43 @@ describe('Component', () => {
 			.toBe('Parameterized Component');
 	});
 
+	it('can be nested in a tag', () => {
+		class ParentComponent extends Component {
+			public make() {
+				return new DivTag().populate([
+					new ChildComponent(),
+					new ChildComponent(),
+				]);
+			}
+		}
+
+		class ChildComponent extends Component {
+			public make() {
+				return new DivTag({ text: 'Child Component' });
+			}
+		}
+
+		const test = new ParentComponent().init().create();
+
+		const parentElement = document.querySelector('div');
+		expect(parentElement).withContext('parent element').toBeTruthy();
+		expect(parentElement?.children.length)
+			.withContext('parent child count')
+			.toBe(2);
+
+		const child1 = parentElement?.children[0] as HTMLElement;
+		expect(child1).withContext('child1 element').toBeTruthy();
+		expect(child1?.innerText)
+			.withContext('child1 text content')
+			.toBe('Child Component');
+
+		const child2 = parentElement?.children[1] as HTMLElement;
+		expect(child2).withContext('child2 element').toBeTruthy();
+		expect(child2?.innerText)
+			.withContext('child2 text content')
+			.toBe('Child Component');
+	});
+
 	it('can have nested components and tags', () => {
 		class ChildComponent extends Component {
 			public make() {
@@ -141,14 +180,23 @@ describe('Component', () => {
 		const parent1Element = document.querySelector('div');
 		expect(parent1Element).withContext('parent1 element').toBeTruthy();
 		expect(parent1Element?.id).withContext('parent1 id').toBe('parent1');
+		expect(parent1Element?.children.length)
+			.withContext('parent1 child count')
+			.toBe(1);
 
 		const parent2Element = parent1Element?.children[0] as HTMLElement;
 		expect(parent2Element).withContext('parent2 element').toBeTruthy();
 		expect(parent2Element?.id).withContext('parent2 id').toBe('parent2');
+		expect(parent2Element?.children.length)
+			.withContext('parent2 child count')
+			.toBe(1);
 
 		const childElement = parent2Element?.children[0] as HTMLElement;
 		expect(childElement).withContext('child element').toBeTruthy();
 		expect(childElement?.id).withContext('child id').toBe('child');
+		expect(childElement?.children.length)
+			.withContext('child child count')
+			.toBe(2);
 
 		const grandchild1Element = childElement?.children[0] as HTMLElement;
 		expect(grandchild1Element)
