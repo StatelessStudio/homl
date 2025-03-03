@@ -41,7 +41,7 @@ describe('Component', () => {
 			.toBe('Child Component');
 	});
 
-	it('can create a component with a div tag and multiple child components', () => {
+	it('can create a component with multiple child components', () => {
 		class ChildComponent extends Component {
 			public make() {
 				return new DivTag({ text: 'Child Component' });
@@ -107,13 +107,64 @@ describe('Component', () => {
 			}
 		}
 
-		new TestComponent('Parameterized Component').init().create();
+		new TestComponent('Parameterized Component').create();
 
-		const divElement = document.querySelector('div');
-		expect(divElement).withContext('div element').toBeTruthy();
-		expect(divElement?.innerText)
+		const element = document.querySelector('div');
+		expect(element).withContext('div element').toBeTruthy();
+		expect(element?.innerText)
 			.withContext('text content')
 			.toBe('Parameterized Component');
+	});
+
+	it('can have nested components and tags', () => {
+		class ChildComponent extends Component {
+			public make() {
+				return new DivTag({ id: 'child' }).populate([
+					new DivTag({ id: 'grandchild1' }),
+					new DivTag({ id: 'grandchild2' }),
+				]);
+			}
+		}
+
+		class ParentComponent extends Component {
+			public make() {
+				return new DivTag({ id: 'parent1' }).populate([
+					new DivTag({ id: 'parent2' }).populate([
+						new ChildComponent(),
+					]),
+				]);
+			}
+		}
+
+		new ParentComponent().init().create();
+
+		const parent1Element = document.querySelector('div');
+		expect(parent1Element).withContext('parent1 element').toBeTruthy();
+		expect(parent1Element?.id).withContext('parent1 id').toBe('parent1');
+
+		const parent2Element = parent1Element?.children[0] as HTMLElement;
+		expect(parent2Element).withContext('parent2 element').toBeTruthy();
+		expect(parent2Element?.id).withContext('parent2 id').toBe('parent2');
+
+		const childElement = parent2Element?.children[0] as HTMLElement;
+		expect(childElement).withContext('child element').toBeTruthy();
+		expect(childElement?.id).withContext('child id').toBe('child');
+
+		const grandchild1Element = childElement?.children[0] as HTMLElement;
+		expect(grandchild1Element)
+			.withContext('grandchild1 element')
+			.toBeTruthy();
+		expect(grandchild1Element?.id)
+			.withContext('grandchild1 id')
+			.toBe('grandchild1');
+
+		const grandchild2Element = childElement?.children[1] as HTMLElement;
+		expect(grandchild2Element)
+			.withContext('grandchild2 element')
+			.toBeTruthy();
+		expect(grandchild2Element?.id)
+			.withContext('grandchild2 id')
+			.toBe('grandchild2');
 	});
 
 	it('can remove a component', () => {

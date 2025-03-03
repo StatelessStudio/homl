@@ -19,11 +19,22 @@ describe('Tag', () => {
 		expect(document.body.contains(tag['element'])).toBeTrue();
 	});
 
-	it('should set the text content of the element', () => {
+	it('can set the text content of the element in the constructor', () => {
 		const text = 'Hello, World!';
-		tag.text.set(text);
+		tag = new TestTag({ text }).create();
+
+		const element = document.getElementsByTagName('div')[0];
+		expect(element.innerText).toBe(text);
+	});
+
+	it('can set the text content of the element', () => {
+		const text = 'Hello, World!';
 		tag.create();
-		expect(tag['element'].innerText).toBe(text);
+
+		tag.text.set(text);
+
+		const element = document.getElementsByTagName('div')[0];
+		expect(element.innerText).toBe(text);
 	});
 
 	it('can set local properties of the Tag', () => {
@@ -132,6 +143,25 @@ describe('Tag', () => {
 		const children = tag['element'].children;
 		expect(children.length).toBe(1);
 		expect((children[0] as HTMLElement).innerText).toBe('Child');
+	});
+
+	it('can nest child elements', () => {
+		const parent = new TestTag({ id: 'parent' })
+			.populate([
+				new TestTag({ id: 'child' }).populate([
+					new TestTag({ id: 'grandchild' }),
+				]),
+			])
+			.create();
+
+		const parentElement = document.querySelector('div');
+		expect(parentElement?.id).toBe('parent');
+
+		const childElement = parentElement?.children[0] as HTMLElement;
+		expect(childElement.id).toBe('child');
+
+		const grandchildElement = childElement.children[0] as HTMLElement;
+		expect(grandchildElement.id).toBe('grandchild');
 	});
 
 	it('should set style when provided in options', () => {
