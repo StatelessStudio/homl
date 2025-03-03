@@ -18,8 +18,9 @@ export class ElementStyling {
 		return this;
 	}
 
-	public setElement(element: HTMLElement): this {
+	public create(element: HTMLElement): this {
 		this.element = element;
+		this.render();
 
 		return this;
 	}

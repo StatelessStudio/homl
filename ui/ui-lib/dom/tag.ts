@@ -110,7 +110,7 @@ export abstract class Tag {
 	}
 
 	protected createStyle(): this {
-		this.style.setElement(this.element);
+		this.style.create(this.element);
 
 		return this;
 	}

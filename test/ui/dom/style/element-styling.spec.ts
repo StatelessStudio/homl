@@ -22,7 +22,7 @@ describe('ElementStyling', () => {
 	});
 
 	it('should set the element', () => {
-		elementStyling.setElement(mockElement);
+		elementStyling.create(mockElement);
 		expect(elementStyling['element']).toBe(mockElement);
 	});
 
@@ -39,7 +39,7 @@ describe('ElementStyling', () => {
 
 	it('should apply styles to the element', () => {
 		const options = { color: 'red', fontSize: '16px' };
-		elementStyling.setElement(mockElement);
+		elementStyling.create(mockElement);
 		elementStyling.set(options);
 		expect(mockElement.style.color).toBe('red');
 		expect(mockElement.style.fontSize).toBe('16px');
