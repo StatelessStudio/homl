@@ -21,7 +21,7 @@ export class TodoList extends Component {
 	public addItem(text: string) {
 		const item = new TodoItem(text);
 		this.items.push(item);
-		this.list.createChild(item.tag);
+		this.list.createChild(item);
 	}
 }
 
