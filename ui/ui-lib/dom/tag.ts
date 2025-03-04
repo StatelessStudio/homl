@@ -16,8 +16,8 @@ export abstract class Tag {
 	public style: ElementStyling = new ElementStyling();
 	public text = new Attribute({ name: 'innerText' });
 
-	public element: HTMLElement;
-	public parent?: Tag;
+	protected element: HTMLElement;
+	protected parent?: Tag;
 
 	protected abstract tag: string;
 	protected children: Array<Tag | Component> = [];
@@ -170,7 +170,7 @@ export abstract class Tag {
 	}
 
 	public appendChild(child: Tag | Component): this {
-		child.parent = this;
+		child.setParent(this);
 		this.children.push(child);
 
 		return this;
@@ -178,6 +178,18 @@ export abstract class Tag {
 
 	public createChild(child: Tag | Component): this {
 		this.appendChild(child.create({ parent: this }));
+
+		return this;
+	}
+
+	public setParent(parent: Tag): this {
+		this.parent = parent;
+
+		return this;
+	}
+
+	public remove(): this {
+		this.element.remove();
 
 		return this;
 	}

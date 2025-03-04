@@ -12,13 +12,13 @@ describe('ElementStyling', () => {
 	});
 
 	it('should initialize with empty styling', () => {
-		expect(elementStyling.styling).toEqual({});
+		expect(elementStyling['styling']).toEqual({});
 	});
 
 	it('should set styling options', () => {
 		const options = { color: 'red', fontSize: '16px' };
 		elementStyling.set(options);
-		expect(elementStyling.styling).toEqual(options);
+		expect(elementStyling['styling']).toEqual(options);
 	});
 
 	it('should set the element', () => {
@@ -31,7 +31,7 @@ describe('ElementStyling', () => {
 		const newOptions = { fontSize: '16px' };
 		elementStyling.set(initialOptions);
 		elementStyling.merge(newOptions);
-		expect(elementStyling.styling).toEqual({
+		expect(elementStyling['styling']).toEqual({
 			color: 'red',
 			fontSize: '16px',
 		});

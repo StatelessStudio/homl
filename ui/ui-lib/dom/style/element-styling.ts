@@ -1,7 +1,7 @@
 import { applyStyleToElement, Styling } from '.';
 
 export class ElementStyling {
-	public styling: Styling = {};
+	protected styling: Styling = {};
 	protected element?: HTMLElement;
 
 	constructor(options: Styling = {}) {

@@ -243,7 +243,9 @@ describe('Component', () => {
 		}
 
 		const parentComponent = new ParentComponent().create();
-		const childComponent = parentComponent.tag['children'][0] as Component;
+		const childComponent = parentComponent['tag'][
+			'children'
+		][0] as Component;
 		childComponent.remove();
 
 		const divElement = document.querySelector('div');

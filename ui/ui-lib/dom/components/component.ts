@@ -1,12 +1,12 @@
 import { Tag } from '../tag';
 
 export abstract class Component {
-	public tag: Tag;
-	public parent?: Tag | Component;
+	protected tag: Tag;
+	protected parent?: Tag | Component;
 
-	public abstract make(): Tag;
+	protected abstract make(): Tag;
 
-	public init(): this {
+	protected init(): this {
 		this.tag = this.make();
 
 		return this;
@@ -29,6 +29,12 @@ export abstract class Component {
 		return this;
 	}
 
+	public setParent(parent: Tag | Component): this {
+		this.parent = parent;
+
+		return this;
+	}
+
 	public render(): this {
 		this.tag.render();
 
@@ -36,7 +42,7 @@ export abstract class Component {
 	}
 
 	public remove(): this {
-		this.tag.element.remove();
+		this.tag.remove();
 
 		return this;
 	}
