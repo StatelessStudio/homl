@@ -7,7 +7,7 @@ export interface TagOptions {
 	id?: string;
 	text?: string;
 	style?: Styling;
-	children?: Tag[];
+	children?: Array<Tag | Component>;
 	parent?: Tag;
 }
 
