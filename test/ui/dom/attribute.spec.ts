@@ -45,9 +45,9 @@ describe('Attribute', () => {
 		expect(attribute.get()).toBe('test-id');
 	});
 
-	it('should return an empty string if the attribute is not set', () => {
+	it('should return null if the attribute has not been set', () => {
 		attribute = new Attribute({ name: 'id' });
-		expect(attribute.get()).toBe('');
+		expect(attribute.get()).toBeNull();
 	});
 
 	it('should return true if the attribute value is null', () => {
@@ -83,5 +83,12 @@ describe('Attribute', () => {
 		attribute.create({ element });
 		attribute.set(null);
 		expect(element.id).toBe('');
+	});
+
+	it('can create an attribute with a boolean value', () => {
+		const boolAttribute = new Attribute({ name: 'disabled', value: true });
+		const inputElement = document.createElement('input');
+		boolAttribute.create({ element: inputElement });
+		expect(inputElement.disabled).toBeTrue();
 	});
 });

@@ -1,10 +1,10 @@
-export class Attribute {
+export class Attribute<T = string> {
 	protected name: string;
 	protected isSet = false;
-	protected value: null | string = null;
+	protected value: null | T = null;
 	protected element?: HTMLElement;
 
-	public constructor(options: { name: string; value?: string }) {
+	public constructor(options: { name: string; value?: T }) {
 		this.name = options.name;
 
 		if (options.value) {
@@ -20,7 +20,7 @@ export class Attribute {
 		}
 	}
 
-	public set(value: null | string) {
+	public set(value: null | T) {
 		this.value = value;
 		this.isSet = true;
 		this.render();
@@ -34,12 +34,12 @@ export class Attribute {
 		(this.element as any)[this.name] = this.value ?? '';
 	}
 
-	public get(): string {
+	public get(): T {
 		if (this.element && this.name in this.element) {
 			this.value = (this.element as any)[this.name];
 		}
 
-		return this.value ?? '';
+		return this.value as T;
 	}
 
 	public isNull(): boolean {
