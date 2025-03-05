@@ -14,9 +14,10 @@ export function example() {
 		addTodo()
 	);
 
-	new PageContainer({ style: { padding: '40px', maxWidth: '400px' } })
-		.populate([todoInput, todoButton, todoList])
-		.create();
+	const page = new PageContainer({
+		style: { padding: '40px', maxWidth: '400px' },
+		children: [todoInput, todoButton, todoList],
+	});
 
 	function addTodo() {
 		const text = todoInput.value.get();
@@ -47,4 +48,6 @@ export function example() {
 			style: { backgroundColor: '' },
 		});
 	}
+
+	return page;
 }

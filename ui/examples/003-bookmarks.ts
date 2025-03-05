@@ -8,17 +8,15 @@ import { PageContainer } from './shared';
 export function example() {
 	let list: UnorderedListTag, nameInput: InputTag, urlInput: InputTag;
 
-	new PageContainer()
-		.populate([
-			(nameInput = new InputTag({ placeholder: 'Name' })),
-			(urlInput = new InputTag({
-				placeholder: 'URL',
-				value: 'https://google.com',
-			})),
-			new ButtonTag({ text: 'Save' }).onClick(() => addBookmark()),
-			(list = new UnorderedListTag()),
-		])
-		.create();
+	const page = new PageContainer().populate([
+		(nameInput = new InputTag({ placeholder: 'Name' })),
+		(urlInput = new InputTag({
+			placeholder: 'URL',
+			value: 'https://google.com',
+		})),
+		new ButtonTag({ text: 'Save' }).onClick(() => addBookmark()),
+		(list = new UnorderedListTag()),
+	]);
 
 	function addBookmark() {
 		const name = nameInput.value.get();
@@ -39,4 +37,6 @@ export function example() {
 			urlInput.value.set('');
 		}
 	}
+
+	return page;
 }

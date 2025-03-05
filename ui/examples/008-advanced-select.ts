@@ -49,7 +49,9 @@ export function example() {
 		carSelect.setValues([])
 	);
 
-	new PageContainer()
-		.populate([carSelect, autoSelectButton, resetButton])
-		.create();
+	return new PageContainer().populate([
+		carSelect,
+		autoSelectButton,
+		resetButton,
+	]);
 }

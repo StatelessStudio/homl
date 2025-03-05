@@ -17,5 +17,5 @@ export function example() {
 		console.log('Selected value:', carSelect.value.get());
 	});
 
-	new PageContainer().populate([carSelect]).create();
+	return new PageContainer().populate([carSelect]);
 }

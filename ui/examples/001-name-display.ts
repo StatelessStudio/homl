@@ -6,13 +6,11 @@ import { PageContainer } from './shared';
 export function example() {
 	let outputField: ParagraphTag, firstNameInput: InputTag;
 
-	new PageContainer()
-		.populate([
-			(outputField = new ParagraphTag({ text: 'What\'s your name?' })),
-			(firstNameInput = new InputTag({ placeholder: 'Set name...' })),
-			new ButtonTag({ text: 'Send' }).onClick(() => setName()),
-		])
-		.create();
+	const page = new PageContainer().populate([
+		(outputField = new ParagraphTag({ text: 'What\'s your name?' })),
+		(firstNameInput = new InputTag({ placeholder: 'Set name...' })),
+		new ButtonTag({ text: 'Send' }).onClick(() => setName()),
+	]);
 
 	function setName() {
 		outputField.text.set(`Hi, ${firstNameInput.value.get()}!`);
@@ -21,4 +19,6 @@ export function example() {
 			value: '',
 		});
 	}
+
+	return page;
 }

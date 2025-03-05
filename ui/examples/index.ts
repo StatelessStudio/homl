@@ -1,4 +1,4 @@
-import { example } from './008-advanced-select';
+import { browser } from './shared/browser/browser';
 
 import { applet } from '../ui-lib/applet/applet';
 import { applyTheme } from './shared';
@@ -6,5 +6,5 @@ import { applyTheme } from './shared';
 applet(() => {
 	applyTheme();
 
-	example();
+	browser();
 });

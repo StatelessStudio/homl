@@ -7,13 +7,11 @@ import { PageContainer } from './shared';
 export function example() {
 	let todoList: UnorderedListTag, todoInput: InputTag;
 
-	new PageContainer()
-		.populate([
-			(todoInput = new InputTag({ placeholder: 'Enter a new todo' })),
-			new ButtonTag({ text: 'Add Todo' }).onClick(() => addTodo()),
-			(todoList = new UnorderedListTag()),
-		])
-		.create();
+	const page = new PageContainer().populate([
+		(todoInput = new InputTag({ placeholder: 'Enter a new todo' })),
+		new ButtonTag({ text: 'Add Todo' }).onClick(() => addTodo()),
+		(todoList = new UnorderedListTag()),
+	]);
 
 	function addTodo() {
 		const text = todoInput.value.get();
@@ -24,4 +22,6 @@ export function example() {
 			todoInput.value.set('');
 		}
 	}
+
+	return page;
 }

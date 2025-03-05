@@ -110,5 +110,5 @@ const redButtonStyle: Styling = {
 };
 
 export function example() {
-	new TodoList().create();
+	return new TodoList();
 }
