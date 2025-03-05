@@ -20,4 +20,29 @@ export class SelectTag extends InputTag {
 	override set(options: SelectTagOptions) {
 		return super.set(options);
 	}
+
+	public getValues() {
+		const result = [];
+		const options = (this.element as HTMLSelectElement)?.options ?? [];
+
+		for (let i = 0, iLen = options.length; i < iLen; i++) {
+			const opt = options[i];
+
+			if (opt.selected) {
+				result.push(opt.value ?? opt.text);
+			}
+		}
+
+		return result;
+	}
+
+	public setValues(values: Array<number | string>) {
+		const options = (this.element as HTMLSelectElement)?.options ?? [];
+
+		for (let i = 0, iLen = options.length; i < iLen; i++) {
+			const opt = options[i];
+
+			opt.selected = values.includes(opt.value ?? opt.text);
+		}
+	}
 }
