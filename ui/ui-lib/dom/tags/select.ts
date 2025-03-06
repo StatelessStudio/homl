@@ -5,12 +5,14 @@ import { InputTag } from './input';
 export interface SelectTagOptions extends TagOptions {
 	value?: string;
 	multiple?: boolean;
+	size?: number;
 }
 
 export class SelectTag extends InputTag {
 	override tag = 'select';
 
 	public multiple = new Attribute<boolean>({ name: 'multiple' });
+	public size = new Attribute<number>({ name: 'size' });
 
 	constructor(options: SelectTagOptions = {}) {
 		super({});

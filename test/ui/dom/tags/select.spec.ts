@@ -164,4 +164,20 @@ describe('SelectTag', () => {
 		const values = selectTag.getValues();
 		expect(values).toEqual(['1']);
 	});
+
+	it('should set the size attribute', () => {
+		const selectTag = new SelectTag({ size: 5 }).create();
+
+		const selectElement = document.querySelector('select');
+		expect(selectElement).toBeTruthy();
+		expect(selectElement?.size).toBe(5);
+	});
+
+	it('should override the size attribute', () => {
+		const selectTag = new SelectTag().create();
+		selectTag.size.set(10);
+
+		const selectElement = document.querySelector('select');
+		expect(selectElement?.size).toBe(10);
+	});
 });
