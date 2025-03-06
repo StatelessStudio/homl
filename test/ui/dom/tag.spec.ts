@@ -51,6 +51,19 @@ describe('Tag', () => {
 		expect(clickSpy).toHaveBeenCalled();
 	});
 
+	it('can add a click event listener', () => {
+		const clickSpy = jasmine.createSpy('clickSpy');
+		tag.on('click', clickSpy).create();
+		tag['element'].click();
+		expect(clickSpy).toHaveBeenCalled();
+	});
+
+	it('should type check the event listener', () => {
+		// This should throw a type error
+		// @ts-expect-error
+		tag.on('asdf', () => 'not a function');
+	});
+
 	it('should create a child element', () => {
 		const child = new TestTag({ text: 'Child' });
 		tag.populate([child]).create();

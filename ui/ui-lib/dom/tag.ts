@@ -194,8 +194,11 @@ export abstract class Tag {
 		return this;
 	}
 
-	public on(action: string, fn: () => void): this {
-		this.eventListeners[action] = fn.bind(this);
+	public on<TEvent extends keyof HTMLElementEventMap>(
+		action: TEvent,
+		fn: (ev: HTMLElementEventMap[TEvent]) => void
+	): this {
+		this.eventListeners[action] = <any>((ev: any) => fn(ev));
 
 		return this;
 	}
