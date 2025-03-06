@@ -1,5 +1,5 @@
 import 'jasmine';
-import { Attribute } from '../../../ui/ui-lib/dom/attribute';
+import { Attribute } from '../../../../ui/ui-lib/dom/attribute';
 
 describe('Attribute', () => {
 	let attribute: Attribute;
@@ -90,5 +90,27 @@ describe('Attribute', () => {
 		const inputElement = document.createElement('input');
 		boolAttribute.create({ element: inputElement });
 		expect(inputElement.disabled).toBeTrue();
+	});
+
+	it('can create an attribute with custom to/from functions', () => {
+		class TestAttribute extends Attribute<string[]> {
+			protected override toString(): string {
+				return (this.value ?? []).join(' ');
+			}
+
+			protected override fromString(value: string): string[] {
+				return value.split(' ');
+			}
+		}
+
+		const classAttribute = new TestAttribute({
+			name: 'custom',
+			value: ['val1', 'val2'],
+		});
+
+		const divElement = document.createElement('div');
+		classAttribute.create({ element: divElement });
+		expect((divElement as any).custom).toBe('val1 val2');
+		expect(classAttribute.get()).toEqual(['val1', 'val2']);
 	});
 });

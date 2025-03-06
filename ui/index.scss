@@ -17,3 +17,29 @@ body {
 	margin: 16px;
 	padding: 16px;
 }
+
+.example-browser {
+	display: flex;
+}
+
+.example-browser .sidebar {
+	position: sticky;
+	top: 0;
+	border-right: 1px solid #e0e0e0;
+	height: 100vh;
+	overflow: auto;
+	min-width: 240px;
+	outline: none;
+	border: none;
+	border-radius: 0px;
+}
+
+.sidebar option {
+	padding: 8px;
+	cursor: pointer;
+}
+
+.inverted-colors {
+	background-color: #1d1b1b;
+	color: #f7f5f2;
+}

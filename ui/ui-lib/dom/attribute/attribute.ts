@@ -31,15 +31,23 @@ export class Attribute<T = string> {
 			return;
 		}
 
-		(this.element as any)[this.name] = this.value ?? '';
+		(this.element as any)[this.name] = this.toString() ?? '';
 	}
 
-	public get(): T {
+	public get(): null | T {
 		if (this.element && this.name in this.element) {
-			this.value = (this.element as any)[this.name];
+			this.value = this.fromString((this.element as any)[this.name]);
 		}
 
 		return this.value as T;
+	}
+
+	protected toString(): string {
+		return this.value as string;
+	}
+
+	protected fromString(value: string): null | T {
+		return value as T;
 	}
 
 	public isNull(): boolean {

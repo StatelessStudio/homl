@@ -22,6 +22,7 @@ export function browser() {
 
 	const page = new DivTag({
 		children: [sidebar, example],
+		styleClasses: ['example-browser'],
 	});
 
 	return page.create();

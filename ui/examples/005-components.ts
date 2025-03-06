@@ -14,14 +14,29 @@ export class TodoList extends Component {
 	protected list = new UnorderedListTag();
 	protected form = new TodoForm({ onSubmit: (text) => this.addItem(text) });
 
+	public prepopulateButton = new ButtonTag({
+		text: 'Prepopulate',
+		style: inlineButtonStyle,
+	}).onClick(() => this.prepopulate());
+
 	public make() {
-		return new PageContainer().populate([this.form, this.list]);
+		return new PageContainer().populate([
+			this.form,
+			this.list,
+			this.prepopulateButton,
+		]);
 	}
 
 	public addItem(text: string) {
 		const item = new TodoItem(text);
 		this.items.push(item);
 		this.list.createChild(item);
+	}
+
+	public prepopulate() {
+		for (let i = 0; i < 50; i++) {
+			this.addItem(`Todo ${i + 1}`);
+		}
 	}
 }
 

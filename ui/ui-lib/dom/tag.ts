@@ -1,4 +1,5 @@
 import { Attribute } from './attribute';
+import { StyleClassesAttribute } from './attribute/attributes/style-classes';
 import { Component } from './components/component';
 import { Styling } from './style';
 import { ElementStyling } from './style/element-styling';
@@ -7,6 +8,7 @@ export interface TagOptions {
 	id?: string;
 	text?: string;
 	style?: Styling;
+	styleClasses?: string[];
 	children?: Array<Tag | Component>;
 	parent?: Tag;
 }
@@ -15,6 +17,7 @@ export abstract class Tag {
 	public id = new Attribute({ name: 'id' });
 	public style: ElementStyling = new ElementStyling();
 	public text = new Attribute({ name: 'innerText' });
+	public styleClasses = new StyleClassesAttribute({ name: 'classList' });
 
 	protected element: HTMLElement;
 	protected parent?: Tag;

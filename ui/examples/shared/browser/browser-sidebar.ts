@@ -4,6 +4,8 @@ import { allExamples } from './all-examples';
 
 export const sidebar = new SelectTag({
 	children: getSidebarOptions(),
+	styleClasses: ['sidebar', 'inverted-colors'],
+	size: 2,
 });
 
 function getSidebarOptions() {

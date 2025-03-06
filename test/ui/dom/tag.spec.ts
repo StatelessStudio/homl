@@ -59,8 +59,7 @@ describe('Tag', () => {
 	});
 
 	it('should type check the event listener', () => {
-		// This should throw a type error
-		// @ts-expect-error
+		// @ts-expect-error - Confirm the event type is checked
 		tag.on('asdf', () => 'not a function');
 	});
 
@@ -194,5 +193,12 @@ describe('Tag', () => {
 
 		const tag = new StyledTag().create();
 		expect(tag['element'].style.color).toBe('green');
+	});
+
+	it('should set styleClasses when provided in options', () => {
+		const styleClasses = ['class1', 'class2'];
+		const tag = new TestTag({ styleClasses }).create();
+		expect(tag['element'].classList.contains('class1')).toBeTrue();
+		expect(tag['element'].classList.contains('class2')).toBeTrue();
 	});
 });

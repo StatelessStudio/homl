@@ -7,7 +7,7 @@ import { HrTag } from '../ui-lib/dom/tags/hr';
 
 export function example() {
 	const carSelect = new SelectTag({
-		style: { height: '300px', width: '100%' },
+		style: { height: '300px', width: '400px' },
 		children: [
 			new OptionGroupTag({
 				label: 'American',
