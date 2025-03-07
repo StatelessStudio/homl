@@ -120,8 +120,14 @@ export abstract class Tag {
 
 	protected registerEventListeners(): this {
 		for (const ev in this.eventListeners) {
-			this.element.addEventListener(ev, this.eventListeners[ev]);
+			this.registerEventListener(ev);
 		}
+
+		return this;
+	}
+
+	protected registerEventListener(ev: string): this {
+		this.element?.addEventListener(ev, this.eventListeners[ev]);
 
 		return this;
 	}
@@ -202,6 +208,7 @@ export abstract class Tag {
 		fn: (ev: HTMLElementEventMap[TEvent]) => void
 	): this {
 		this.eventListeners[action] = <any>((ev: any) => fn(ev));
+		this.registerEventListener(action);
 
 		return this;
 	}

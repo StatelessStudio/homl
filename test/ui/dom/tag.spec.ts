@@ -51,6 +51,13 @@ describe('Tag', () => {
 		expect(clickSpy).toHaveBeenCalled();
 	});
 
+	it('can add event listeners after create', () => {
+		const clickSpy = jasmine.createSpy('clickSpy');
+		tag.create().onClick(clickSpy);
+		tag['element'].click();
+		expect(clickSpy).toHaveBeenCalled();
+	});
+
 	it('can add a click event listener', () => {
 		const clickSpy = jasmine.createSpy('clickSpy');
 		tag.on('click', clickSpy).create();
