@@ -10,7 +10,7 @@ export class ElementStyling {
 
 	public set(options: Styling): this {
 		for (const key in options) {
-			this.styling[key] = <any>options[key];
+			this.styling[key] = options[key];
 		}
 
 		this.render();

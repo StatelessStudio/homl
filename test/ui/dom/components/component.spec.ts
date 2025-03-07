@@ -83,7 +83,7 @@ describe('Component', () => {
 			}
 		}
 
-		const parent = new ParentComponent().create();
+		new ParentComponent().create();
 
 		const parentElement = document.querySelector('div');
 		expect(parentElement).withContext('div element').toBeTruthy();
@@ -134,7 +134,7 @@ describe('Component', () => {
 			}
 		}
 
-		const test = new ParentComponent().create();
+		new ParentComponent().create();
 
 		const parentElement = document.querySelector('div');
 		expect(parentElement).withContext('parent element').toBeTruthy();

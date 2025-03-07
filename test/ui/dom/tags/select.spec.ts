@@ -5,7 +5,7 @@ import { SelectTag } from '../../../../ui/ui-lib/dom/tags/select';
 
 describe('SelectTag', () => {
 	it('should create a SelectTag with default values', () => {
-		const selectTag = new SelectTag().create();
+		new SelectTag().create();
 
 		const selectElement = document.querySelector('select');
 		expect(selectElement).toBeTruthy();
@@ -14,7 +14,7 @@ describe('SelectTag', () => {
 	});
 
 	it('should set the multiple attribute', () => {
-		const selectTag = new SelectTag({ multiple: true }).create();
+		new SelectTag({ multiple: true }).create();
 
 		const selectElement = document.querySelector('select');
 		expect(selectElement?.multiple).toBeTruthy();
@@ -37,7 +37,7 @@ describe('SelectTag', () => {
 	});
 
 	it('can have options', () => {
-		const selectTag = new SelectTag({
+		new SelectTag({
 			children: [
 				new OptionTag({ value: '1', text: 'One' }),
 				new OptionTag({ value: '2', text: 'Two' }),
@@ -69,12 +69,12 @@ describe('SelectTag', () => {
 	});
 
 	it('can remove options', () => {
-		let option1: OptionTag, option2: OptionTag;
+		let option1: OptionTag;
 
-		const selectTag = new SelectTag({
+		new SelectTag({
 			children: [
 				(option1 = new OptionTag({ value: '1', text: 'One' })),
-				(option2 = new OptionTag({ value: '2', text: 'Two' })),
+				new OptionTag({ value: '2', text: 'Two' }),
 			],
 		}).create();
 
@@ -191,7 +191,7 @@ describe('SelectTag', () => {
 	});
 
 	it('should set the size attribute', () => {
-		const selectTag = new SelectTag({ size: 5 }).create();
+		new SelectTag({ size: 5 }).create();
 
 		const selectElement = document.querySelector('select');
 		expect(selectElement).toBeTruthy();

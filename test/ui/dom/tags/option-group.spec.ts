@@ -1,10 +1,9 @@
 import '../../mock-dom';
 import { OptionGroupTag } from '../../../../ui/ui-lib/dom/tags/option-group';
-import { OptionTag } from '../../../../ui/ui-lib/dom/tags/option';
 
 describe('OptionGroupTag', () => {
 	it('should create an OptionGroupTag with default values', () => {
-		const optionGroupTag = new OptionGroupTag().create();
+		new OptionGroupTag().create();
 
 		const optgroupElement = document.querySelector('optgroup');
 		expect(optgroupElement).toBeTruthy();
@@ -13,7 +12,7 @@ describe('OptionGroupTag', () => {
 	});
 
 	it('should set the label attribute', () => {
-		const optionGroupTag = new OptionGroupTag({
+		new OptionGroupTag({
 			label: 'Group 1',
 		}).create();
 

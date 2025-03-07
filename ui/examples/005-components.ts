@@ -65,17 +65,19 @@ export class TodoForm extends Component {
 }
 
 export class TodoItem extends Component {
+	protected textTag: ParagraphTag;
+
 	public constructor(
 		public text: string,
 		public isDone = false
 	) {
 		super();
-	}
 
-	public textTag = new ParagraphTag({
-		text: this.text,
-		style: inlineButtonStyle,
-	});
+		this.textTag = new ParagraphTag({
+			text: this.text,
+			style: inlineButtonStyle,
+		});
+	}
 
 	public toggleButton = new ButtonTag({
 		text: 'Done',

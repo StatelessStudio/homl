@@ -1,5 +1,5 @@
 import { Attribute } from '../attribute';
-import { Tag, TagOptions } from '../tag';
+import { TagOptions } from '../tag';
 import { InputTag } from './input';
 
 export interface SelectTagOptions extends TagOptions {

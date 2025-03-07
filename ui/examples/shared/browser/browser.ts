@@ -10,6 +10,11 @@ export function browser() {
 		text: 'Please select an example',
 	});
 
+	const page = new DivTag({
+		children: [sidebar, example],
+		styleClasses: ['example-browser'],
+	}).create();
+
 	sidebar.on('change', () => {
 		const value = sidebar.value.get();
 
@@ -20,10 +25,5 @@ export function browser() {
 		}
 	});
 
-	const page = new DivTag({
-		children: [sidebar, example],
-		styleClasses: ['example-browser'],
-	});
-
-	return page.create();
+	return page;
 }

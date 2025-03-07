@@ -130,7 +130,7 @@ describe('Tag', () => {
 		expect((children[0] as HTMLElement).innerText).toBe('Child');
 	});
 
-	it('appendChild() does not render the child until create() is called', () => {
+	it('appendChild does not render the child until create is called', () => {
 		const child = new TestTag({ text: 'Child' });
 		tag.create();
 		tag.appendChild(child);
@@ -163,7 +163,7 @@ describe('Tag', () => {
 	});
 
 	it('can nest child elements', () => {
-		const parent = new TestTag({ id: 'parent' })
+		new TestTag({ id: 'parent' })
 			.populate([
 				new TestTag({ id: 'child' }).populate([
 					new TestTag({ id: 'grandchild' }),

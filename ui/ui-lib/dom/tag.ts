@@ -19,7 +19,7 @@ export abstract class Tag {
 	public text = new Attribute({ name: 'innerText' });
 	public styleClasses = new StyleClassesAttribute({ name: 'classList' });
 
-	protected element: HTMLElement;
+	public element: HTMLElement;
 	protected parent?: Tag;
 
 	protected abstract tag: string;

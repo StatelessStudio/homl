@@ -37,7 +37,7 @@ describe('StyleClassesAttribute', () => {
 	});
 
 	it('should not allow string values', () => {
-		const attr = new StyleClassesAttribute({
+		new StyleClassesAttribute({
 			name: 'classList',
 			//@ts-expect-error - Confirm string values are not allowed
 			value: '',
@@ -45,7 +45,7 @@ describe('StyleClassesAttribute', () => {
 	});
 
 	it('should not allow null value', () => {
-		const attr = new StyleClassesAttribute({
+		new StyleClassesAttribute({
 			name: 'classList',
 			//@ts-expect-error - Confirm null values are not allowed
 			value: null,

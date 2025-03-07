@@ -108,9 +108,11 @@ describe('Attribute', () => {
 			value: ['val1', 'val2'],
 		});
 
-		const divElement = document.createElement('div');
+		const divElement = document.createElement('div') as HTMLDivElement & {
+			custom: string;
+		};
 		classAttribute.create({ element: divElement });
-		expect((divElement as any).custom).toBe('val1 val2');
+		expect(divElement.custom).toBe('val1 val2');
 		expect(classAttribute.get()).toEqual(['val1', 'val2']);
 	});
 });

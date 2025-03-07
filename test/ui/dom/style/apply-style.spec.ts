@@ -40,7 +40,7 @@ describe('applyStyle', () => {
 });
 
 describe('convertStylingRuleName', () => {
-	it('should convert camelCase to kebab-case', () => {
+	it('can convert camelCase to kebab-case', () => {
 		expect(convertStylingRuleName('backgroundColor')).toBe(
 			'background-color'
 		);
@@ -50,16 +50,16 @@ describe('convertStylingRuleName', () => {
 		);
 	});
 
-	it('should return the same string if no uppercase letters are present', () => {
+	it('can handle strings with no uppercase letters', () => {
 		expect(convertStylingRuleName('color')).toBe('color');
 		expect(convertStylingRuleName('width')).toBe('width');
 	});
 
-	it('should handle empty strings', () => {
+	it('can handle empty strings', () => {
 		expect(convertStylingRuleName('')).toBe('');
 	});
 
-	it('should handle strings with multiple uppercase letters', () => {
+	it('can handle strings with multiple uppercase letters', () => {
 		expect(convertStylingRuleName('MozTransition')).toBe('-moz-transition');
 		expect(convertStylingRuleName('WebkitTransform')).toBe(
 			'-webkit-transform'

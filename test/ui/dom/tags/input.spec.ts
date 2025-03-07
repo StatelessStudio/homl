@@ -14,7 +14,7 @@ describe('InputTag', () => {
 		const placeholder = 'Enter text';
 		const value = 'test value';
 
-		const input = new InputTag({ placeholder, value }).create();
+		new InputTag({ placeholder, value }).create();
 
 		const inputElement = document.querySelector('input');
 		expect(inputElement?.placeholder)

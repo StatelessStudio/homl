@@ -1,7 +1,7 @@
 import { SelectTag } from '../ui-lib/dom/tags/select';
-import { Component } from '../ui-lib/dom/components';
 import { PageContainer } from './shared';
 import { OptionTag } from '../ui-lib/dom/tags/option';
+import { ParagraphTag } from '../ui-lib/dom/tags/paragraph';
 
 export function example() {
 	const carSelect = new SelectTag({
@@ -13,9 +13,11 @@ export function example() {
 		value: '3',
 	});
 
+	const output = new ParagraphTag({ text: 'No selection' });
+
 	carSelect.on('change', () => {
-		console.log('Selected value:', carSelect.value.get());
+		output.set({ text: `Selected: ${carSelect.value.get()}` });
 	});
 
-	return new PageContainer().populate([carSelect]);
+	return new PageContainer().populate([carSelect, output]);
 }

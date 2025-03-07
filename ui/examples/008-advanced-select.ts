@@ -4,8 +4,11 @@ import { OptionTag } from '../ui-lib/dom/tags/option';
 import { OptionGroupTag } from '../ui-lib/dom/tags/option-group';
 import { ButtonTag } from '../ui-lib/dom/tags/button';
 import { HrTag } from '../ui-lib/dom/tags/hr';
+import { ParagraphTag } from '../ui-lib/dom/tags/paragraph';
 
 export function example() {
+	const selectionDisplay = new ParagraphTag({ text: 'No selection' });
+
 	const carSelect = new SelectTag({
 		style: { height: '300px', width: '400px' },
 		children: [
@@ -37,21 +40,35 @@ export function example() {
 		multiple: true,
 	});
 
-	carSelect.on('change', () => {
-		console.log('Selected value:', carSelect.getValues());
-	});
+	carSelect.on('change', () => updateSelectionDisplay(carSelect.getValues()));
 
 	const autoSelectButton = new ButtonTag({ text: 'One of Each' }).onClick(
-		() => carSelect.setValues(['f', 't', 'b'])
+		() => setValues(['f', 't', 'b'])
 	);
 
 	const resetButton = new ButtonTag({ text: 'Reset' }).onClick(() =>
-		carSelect.setValues([])
+		setValues([])
 	);
 
-	return new PageContainer().populate([
+	const page = new PageContainer().populate([
 		carSelect,
 		autoSelectButton,
 		resetButton,
+		selectionDisplay,
 	]);
+
+	function setValues(values: string[]) {
+		carSelect.setValues(values);
+		updateSelectionDisplay(values);
+	}
+
+	function updateSelectionDisplay(selected: (string | number)[]) {
+		selectionDisplay.text.set(
+			selected.length
+				? 'Selected: ' + selected.join(', ')
+				: 'No selection'
+		);
+	}
+
+	return page;
 }
