@@ -8,3 +8,9 @@ global.document = window.document;
 global.navigator = {
 	userAgent: 'node.js',
 } as any;
+
+beforeEach(() => {
+	// Reset the dom before each test
+	document.body.innerHTML = '';
+	document.head.innerHTML = '';
+});

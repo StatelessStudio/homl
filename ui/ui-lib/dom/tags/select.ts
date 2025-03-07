@@ -14,6 +14,8 @@ export class SelectTag extends InputTag {
 	public multiple = new Attribute<boolean>({ name: 'multiple' });
 	public size = new Attribute<number>({ name: 'size' });
 
+	protected values: Array<number | string> = [];
+
 	constructor(options: SelectTagOptions = {}) {
 		super({});
 		this.set(options);
@@ -24,27 +26,53 @@ export class SelectTag extends InputTag {
 	}
 
 	public getValues() {
+		return this.element ? this.getSelectedNodes() : this.values;
+	}
+
+	protected getSelectedNodes() {
 		const result = [];
-		const options = (this.element as HTMLSelectElement)?.options ?? [];
+		const options = (this.element as HTMLSelectElement).options;
 
 		for (let i = 0, iLen = options.length; i < iLen; i++) {
 			const opt = options[i];
 
 			if (opt.selected) {
-				result.push(opt.value ?? opt.text);
+				result.push(opt.value);
 			}
 		}
 
 		return result;
 	}
 
-	public setValues(values: Array<number | string>) {
+	public override render(): this {
+		super.render();
+
+		if (this.values.length) {
+			this.renderSelectedNodes();
+		}
+		else {
+			this.values = this.getSelectedNodes();
+		}
+
+		return this;
+	}
+
+	public setValues(values: Array<number | string>): this {
+		this.values = values;
+		this.renderSelectedNodes();
+
+		return this;
+	}
+
+	protected renderSelectedNodes() {
 		const options = (this.element as HTMLSelectElement)?.options ?? [];
 
 		for (let i = 0, iLen = options.length; i < iLen; i++) {
 			const opt = options[i];
 
-			opt.selected = values.includes(opt.value ?? opt.text);
+			opt.selected = this.values.includes(opt.value);
 		}
+
+		return this;
 	}
 }

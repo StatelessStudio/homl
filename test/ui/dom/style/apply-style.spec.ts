@@ -9,8 +9,6 @@ describe('applyStyle', () => {
 	let insertRuleSpy: jasmine.Spy;
 
 	beforeEach(() => {
-		document.body.innerHTML = '';
-
 		insertRuleSpy = spyOn(window.CSSStyleSheet.prototype, 'insertRule');
 		insertRuleSpy.and.returnValue(0);
 	});

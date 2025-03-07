@@ -215,6 +215,27 @@ describe('Component', () => {
 			.toBe('grandchild2');
 	});
 
+	it('can set the parent component', () => {
+		class ChildComponent extends Component {
+			public make() {
+				return new DivTag({ text: 'Child Component' });
+			}
+		}
+
+		class ParentComponent extends Component {
+			public make() {
+				return new DivTag().populate([]);
+			}
+		}
+
+		const parent = new ParentComponent().create();
+		const child = new ChildComponent();
+		child.setParent(parent).create();
+
+		const parentElement = document.querySelector('div');
+		expect(parentElement).withContext('parent element').toBeTruthy();
+	});
+
 	it('can remove a component', () => {
 		class TestComponent extends Component {
 			public make() {
