@@ -1,6 +1,6 @@
 import 'jasmine';
 import '../mock-dom';
-import { applet } from '../../../ui/ui-lib/applet/applet';
+import { applet } from '../../../ui/lib/applet';
 
 describe('applet', function () {
 	let eventListenerSpy: jasmine.Spy;

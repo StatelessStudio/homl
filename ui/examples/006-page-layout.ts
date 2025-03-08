@@ -1,7 +1,6 @@
-import { UnorderedListTag } from '../ui-lib/dom/tags/unordered-list';
-import { Component } from '../ui-lib/dom/components';
-import { DivTag } from '../ui-lib/dom/tags/div';
-import { ListItemTag } from '../ui-lib/dom/tags/list-item';
+import { Component } from '../lib/components';
+import { DivTag } from '../lib/tags/layout/div';
+import { ListItemTag, UnorderedListTag } from '../lib/tags/list';
 import { PageContainer } from './shared';
 
 export class PageLayout extends Component {

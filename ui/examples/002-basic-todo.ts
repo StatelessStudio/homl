@@ -1,7 +1,5 @@
-import { ButtonTag } from '../ui-lib/dom/tags/button';
-import { InputTag } from '../ui-lib/dom/tags/input';
-import { UnorderedListTag } from '../ui-lib/dom/tags/unordered-list';
-import { ListItemTag } from '../ui-lib/dom/tags/list-item';
+import { ButtonTag, InputTag } from '../lib/tags/form';
+import { ListItemTag, UnorderedListTag } from '../lib/tags/list';
 import { PageContainer } from './shared';
 
 export function example() {

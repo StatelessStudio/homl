@@ -1,10 +1,12 @@
-import { SelectTag } from '../ui-lib/dom/tags/select';
 import { PageContainer } from './shared';
-import { OptionTag } from '../ui-lib/dom/tags/option';
-import { OptionGroupTag } from '../ui-lib/dom/tags/option-group';
-import { ButtonTag } from '../ui-lib/dom/tags/button';
-import { HrTag } from '../ui-lib/dom/tags/hr';
-import { ParagraphTag } from '../ui-lib/dom/tags/paragraph';
+import {
+	ButtonTag,
+	SelectTag,
+	OptionGroupTag,
+	OptionTag,
+} from '../lib/tags/form';
+import { HrTag } from '../lib/tags/layout';
+import { ParagraphTag } from '../lib/tags/text/paragraph';
 
 export function example() {
 	const selectionDisplay = new ParagraphTag({ text: 'No selection' });

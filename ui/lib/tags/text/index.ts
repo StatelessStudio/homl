@@ -1,0 +1,1 @@
+export { ParagraphTag } from './paragraph';

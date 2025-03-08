@@ -1,6 +1,6 @@
-import { StyleClassesAttribute } from '../../ui-lib/dom/attribute/attributes/style-classes';
-import { px, Styling } from '../../ui-lib/dom/style';
-import { DivTag } from '../../ui-lib/dom/tags/div';
+import { StyleClassesAttribute } from '../../lib/attributes/style-classes';
+import { px, Styling } from '../../lib/style';
+import { DivTag } from '../../lib/tags/layout/div';
 
 export class PageContainer extends DivTag {
 	public override styleClasses = new StyleClassesAttribute({

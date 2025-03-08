@@ -1,6 +1,5 @@
-import { ParagraphTag } from '../ui-lib/dom/tags/paragraph';
-import { ButtonTag } from '../ui-lib/dom/tags/button';
-import { InputTag } from '../ui-lib/dom/tags/input';
+import { ParagraphTag } from '../lib/tags/text/paragraph';
+import { ButtonTag, InputTag } from '../lib/tags/form';
 import { PageContainer } from './shared';
 
 export function example() {

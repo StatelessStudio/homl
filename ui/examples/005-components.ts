@@ -1,12 +1,10 @@
-import { ButtonTag } from '../ui-lib/dom/tags/button';
-import { InputTag } from '../ui-lib/dom/tags/input';
-import { Component } from '../ui-lib/dom/components';
-import { ParagraphTag } from '../ui-lib/dom/tags/paragraph';
+import { ButtonTag, InputTag } from '../lib/tags/form';
+import { Component } from '../lib/components';
+import { ParagraphTag } from '../lib/tags/text/paragraph';
 import { PageContainer } from './shared';
-import { ListItemTag } from '../ui-lib/dom/tags/list-item';
-import { UnorderedListTag } from '../ui-lib/dom/tags/unordered-list';
-import { Styling } from '../ui-lib/dom/style';
-import { DivTag } from '../ui-lib/dom/tags/div';
+import { ListItemTag, UnorderedListTag } from '../lib/tags/list';
+import { Styling } from '../lib/style';
+import { DivTag } from '../lib/tags/layout/div';
 
 export class TodoList extends Component {
 	protected items: TodoItem[] = [];

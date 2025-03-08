@@ -1,4 +1,4 @@
-import { applyStyle, Styling } from '../../ui-lib/dom/style';
+import { applyStyle, Styling } from '../../lib/style';
 
 export function applyTheme() {
 	const styleTheme: Styling = {

@@ -1,0 +1,1 @@
+export { LinkTag } from './link';

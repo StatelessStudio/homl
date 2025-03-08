@@ -1,5 +1,5 @@
-import { Component } from '../../../ui-lib/dom/components';
-import { Tag } from '../../../ui-lib/dom/tag';
+import { Component } from '../../../lib/components';
+import { Tag } from '../../../lib/tags';
 
 import { example as example001 } from '../../001-name-display';
 import { example as example002 } from '../../002-basic-todo';

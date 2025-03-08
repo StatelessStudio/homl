@@ -1,7 +1,6 @@
-import { SelectTag } from '../ui-lib/dom/tags/select';
 import { PageContainer } from './shared';
-import { OptionTag } from '../ui-lib/dom/tags/option';
-import { ParagraphTag } from '../ui-lib/dom/tags/paragraph';
+import { SelectTag, OptionTag } from '../lib/tags/form';
+import { ParagraphTag } from '../lib/tags/text/paragraph';
 
 export function example() {
 	const carSelect = new SelectTag({

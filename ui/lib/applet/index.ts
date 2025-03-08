@@ -1,0 +1,1 @@
+export { applet } from './applet';

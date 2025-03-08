@@ -1,5 +1,4 @@
-import { SelectTag } from '../../../ui-lib/dom/tags/select';
-import { OptionTag } from '../../../ui-lib/dom/tags/option';
+import { SelectTag, OptionTag } from '../../../lib/tags/form';
 import { allExamples } from './all-examples';
 
 export const sidebar = new SelectTag({
